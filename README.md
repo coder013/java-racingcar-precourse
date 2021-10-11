@@ -7,9 +7,9 @@
 * [과제 제출 방법](https://github.com/next-step/nextstep-docs/tree/master/precourse)
 
 ## 기능 목록
-* 사용자 입력[ ]
+* 사용자 입력[O]
 	* 자동차 이름 입력[O]
-	* 이동 횟수 입력[ ]
+	* 이동 횟수 입력[O]
 * 경주 진행[ ]
 	* 자동차 이동[ ]
 	* 자동차 이름 및 현재 위치 출력[ ]

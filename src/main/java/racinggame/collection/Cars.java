@@ -1,5 +1,7 @@
 package racinggame.collection;
 
+import racinggame.enums.MessageEnum;
+
 import java.util.List;
 
 public class Cars {
@@ -24,7 +26,7 @@ public class Cars {
 
     private void validateNull(Car car) {
         if (car.getName() == null || car.getName().equals("")) {
-            throw new IllegalArgumentException("[ERROR] 이름이 공백입니다. 다시 입력해주세요.");
+            throw new IllegalArgumentException(MessageEnum.ERROR_MESSAGE_WHEN_NAME_IS_NULL.getValue());
         }
     }
 
@@ -42,7 +44,7 @@ public class Cars {
 
     private void validateDuplicate(List<Car> carList, int i, int j) {
         if (carList.get(i).getName().equals(carList.get(j).getName())) {
-            throw new IllegalArgumentException("[ERROR] 이름이 중복되었습니다. 다시 입력해주세요.");
+            throw new IllegalArgumentException(MessageEnum.ERROR_MESSAGE_WHEN_NAME_IS_DUPLICATE.getValue());
         }
     }
 }
