@@ -1,10 +1,10 @@
-package racinggame.collection;
+package racinggame.model;
 
-public class NumberOfTry {
+public class TotalTry {
 
     private final int value;
 
-    public NumberOfTry(int value) {
+    public TotalTry(int value) {
         validateNumber(value);
         this.value = value;
     }

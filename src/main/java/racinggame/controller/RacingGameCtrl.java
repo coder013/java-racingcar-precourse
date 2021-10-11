@@ -1,9 +1,10 @@
 package racinggame.controller;
 
 import nextstep.utils.Console;
-import racinggame.collection.Cars;
-import racinggame.collection.Car;
-import racinggame.collection.NumberOfTry;
+import racinggame.model.Cars;
+import racinggame.model.Car;
+import racinggame.model.CurrentTry;
+import racinggame.model.TotalTry;
 import racinggame.enums.MessageEnum;
 import racinggame.view.RacingGameView;
 
@@ -21,16 +22,29 @@ public class RacingGameCtrl {
     public void play() {
         racingGameView.printMessageWhenInputCarName();
         Cars cars = getCars();
-        racingGameView.printMessageWhenInputNumberOfCount();
-        NumberOfTry numberOfTry = getNumberOfTry();
+        racingGameView.printMessageWhenInputTotalTry();
+        TotalTry totalTry = getTotalTry();
 
-        List<Car> carList = cars.getCarList();
+        start(cars, totalTry);
+        end();
+    }
 
-        for (Car car : carList) {
-            System.out.println(car.getName());
+    private void start(Cars cars, TotalTry totalTry) {
+        for (int currentTry = 1; currentTry <= totalTry.getValue(); currentTry++) {
+            racingGameView.printMessageWhenRaceStart(new CurrentTry(currentTry));
+            race(cars);
         }
+    }
 
-        System.out.println(numberOfTry.getValue());
+    private void race(Cars cars) {
+        for (Car car : cars.getCarList()) {
+            car.move();
+            racingGameView.printMessageWhenRacing(car);
+        }
+    }
+
+    private void end() {
+        racingGameView.printMessageWhenRaceEnd();
     }
 
     private Cars getCars() {
@@ -52,23 +66,23 @@ public class RacingGameCtrl {
         List<Car> carList = new ArrayList<>();
 
         for (String name : names) {
-            carList.add(new Car(name));
+            carList.add(new Car(name.trim()));
         }
 
         return carList;
     }
 
-    private NumberOfTry getNumberOfTry() {
-        NumberOfTry numberOfTry;
+    private TotalTry getTotalTry() {
+        TotalTry totalTry;
 
         try {
-            numberOfTry = new NumberOfTry(Integer.parseInt(getUserInput()));
-        } catch (Exception e) {
+            totalTry = new TotalTry(Integer.parseInt(getUserInput()));
+        } catch (IllegalArgumentException e) {
             racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_NOT_NUMBER.getValue());
-            numberOfTry = getNumberOfTry();
+            totalTry = getTotalTry();
         }
 
-        return numberOfTry;
+        return totalTry;
     }
 
     private String getUserInput() {
