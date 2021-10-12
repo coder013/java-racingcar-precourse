@@ -1,16 +1,12 @@
 package racinggame.controller;
 
 import nextstep.utils.Console;
-import racinggame.model.Cars;
-import racinggame.model.Car;
-import racinggame.model.CurrentTry;
-import racinggame.model.TotalTry;
+import racinggame.model.*;
 import racinggame.enums.MessageEnum;
 import racinggame.view.RacingGameView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class RacingGameCtrl {
 
@@ -25,7 +21,6 @@ public class RacingGameCtrl {
         Cars cars = getCars();
         racingGameView.printMessageWhenInputTotalTry();
         TotalTry totalTry = getTotalTry();
-
         start(cars, totalTry);
         end();
     }
@@ -37,15 +32,15 @@ public class RacingGameCtrl {
         }
     }
 
+    private void end() {
+        racingGameView.printMessageWhenRaceEnd();
+    }
+
     private void race(Cars cars) {
         for (Car car : cars.getCarList()) {
             car.move();
             racingGameView.printMessageWhenRacing(car);
         }
-    }
-
-    private void end() {
-        racingGameView.printMessageWhenRaceEnd();
     }
 
     private Cars getCars() {
@@ -56,9 +51,6 @@ public class RacingGameCtrl {
         } catch (IllegalArgumentException e) {
             racingGameView.printErrorMessage(e.getMessage());
             cars = getCars();
-        } catch (NoSuchElementException e) {
-            racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_INPUTTING.getValue());
-            throw e;
         }
 
         return cars;
@@ -84,9 +76,6 @@ public class RacingGameCtrl {
         } catch (IllegalArgumentException e) {
             racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_NOT_NUMBER.getValue());
             totalTry = getTotalTry();
-        } catch (NoSuchElementException e) {
-            racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_INPUTTING.getValue());
-            throw e;
         }
 
         return totalTry;

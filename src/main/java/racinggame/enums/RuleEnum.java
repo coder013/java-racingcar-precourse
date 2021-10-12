@@ -1,6 +1,7 @@
 package racinggame.enums;
 
 public enum RuleEnum {
+    NAME_SIZE(5),
     START_RANGE(0),
     END_RANGE(9),
     MOVE_CONDITION(4);
