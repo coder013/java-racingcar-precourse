@@ -25,7 +25,7 @@ public class Car {
     }
 
     private void validateNull(String name) {
-        if (name == null || name.equals("")) {
+        if (name == null || name.length() == 0) {
             throw new IllegalArgumentException(MessageEnum.ERROR_MESSAGE_WHEN_NAME_IS_NULL.getValue());
         }
     }

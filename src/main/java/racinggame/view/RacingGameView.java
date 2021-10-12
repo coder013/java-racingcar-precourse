@@ -3,6 +3,8 @@ package racinggame.view;
 import racinggame.model.Car;
 import racinggame.model.CurrentTry;
 import racinggame.enums.MessageEnum;
+import racinggame.model.Winner;
+import racinggame.model.Winners;
 
 public class RacingGameView {
 
@@ -26,7 +28,13 @@ public class RacingGameView {
         System.out.println(car.getName() + " : " + location);
     }
 
-    public void printMessageWhenRaceEnd() {
+    public void printMessageWhenRaceEnd(Winners winners) {
+        StringBuilder names = new StringBuilder();
+        for (Winner winner : winners.getWinnerList()) {
+            names.append(String.format(",%s", winner.getName()));
+        }
+        names.deleteCharAt(0);
+        System.out.printf(MessageEnum.MESSAGE_WHEN_RACE_END.getValue(), names);
     }
 
     public void printErrorMessage(String errorMessage) {

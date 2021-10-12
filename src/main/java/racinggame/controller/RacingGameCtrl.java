@@ -22,7 +22,8 @@ public class RacingGameCtrl {
         racingGameView.printMessageWhenInputTotalTry();
         TotalTry totalTry = getTotalTry();
         start(cars, totalTry);
-        end();
+        Winners winners = getWinners(cars);
+        end(winners);
     }
 
     private void start(Cars cars, TotalTry totalTry) {
@@ -32,8 +33,8 @@ public class RacingGameCtrl {
         }
     }
 
-    private void end() {
-        racingGameView.printMessageWhenRaceEnd();
+    private void end(Winners winners) {
+        racingGameView.printMessageWhenRaceEnd(winners);
     }
 
     private void race(Cars cars) {
@@ -79,6 +80,52 @@ public class RacingGameCtrl {
         }
 
         return totalTry;
+    }
+
+    private Winners getWinners(Cars cars) {
+        Winners winners;
+
+        try {
+            winners = new Winners(getWinnerList(cars));
+        } catch (IllegalArgumentException e) {
+            racingGameView.printErrorMessage(e.getMessage());
+            winners = getWinners(cars);
+        }
+
+        return winners;
+    }
+
+    private List<Winner> getWinnerList(Cars cars) {
+        List<Winner> winnerList = new ArrayList<>();
+        FarthestLocation farthestLocation = getFarthestLocation(cars);
+
+        for (Car car : cars.getCarList()) {
+            addWinner(winnerList, car, farthestLocation);
+        }
+
+        return winnerList;
+    }
+
+    private void addWinner(List<Winner> winnerList, Car car, FarthestLocation farthestLocation) {
+        if (car.getLocation() == farthestLocation.getValue()) {
+            winnerList.add(new Winner(car.getName()));
+        }
+    }
+
+    private FarthestLocation getFarthestLocation(Cars cars) {
+        FarthestLocation farthestLocation = new FarthestLocation();
+
+        for (Car car : cars.getCarList()) {
+            changeFarthestLocation(car, farthestLocation);
+        }
+
+        return farthestLocation;
+    }
+
+    private void changeFarthestLocation(Car car, FarthestLocation farthestLocation) {
+        if (car.getLocation() > farthestLocation.getValue()) {
+            farthestLocation.changeValue(car.getLocation());
+        }
     }
 
     private String getUserInput() {
