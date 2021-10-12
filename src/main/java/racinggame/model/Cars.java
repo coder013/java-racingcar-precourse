@@ -31,7 +31,6 @@ public class Cars {
     private void validateNull(Car car) {
         if (car == null || car.getName() == null || car.getName().equals("")) {
             throw new IllegalArgumentException(MessageEnum.ERROR_MESSAGE_WHEN_NAME_IS_NULL.getValue());
-
         }
     }
 

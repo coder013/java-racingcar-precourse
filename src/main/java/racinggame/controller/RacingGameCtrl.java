@@ -10,6 +10,7 @@ import racinggame.view.RacingGameView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class RacingGameCtrl {
 
@@ -55,6 +56,9 @@ public class RacingGameCtrl {
         } catch (IllegalArgumentException e) {
             racingGameView.printErrorMessage(e.getMessage());
             cars = getCars();
+        } catch (NoSuchElementException e) {
+            racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_INPUTTING.getValue());
+            throw e;
         }
 
         return cars;
@@ -80,6 +84,9 @@ public class RacingGameCtrl {
         } catch (IllegalArgumentException e) {
             racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_NOT_NUMBER.getValue());
             totalTry = getTotalTry();
+        } catch (NoSuchElementException e) {
+            racingGameView.printErrorMessage(MessageEnum.ERROR_MESSAGE_WHEN_INPUTTING.getValue());
+            throw e;
         }
 
         return totalTry;

@@ -6,7 +6,8 @@ public enum MessageEnum {
     MESSAGE_WHEN_RACE_START("번째 시도입니다."),
     ERROR_MESSAGE_WHEN_NAME_IS_NULL("[ERROR] 이름이 공백입니다. 다시 입력해주세요."),
     ERROR_MESSAGE_WHEN_NAME_IS_DUPLICATE("[ERROR] 이름이 중복되었습니다. 다시 입력해주세요."),
-    ERROR_MESSAGE_WHEN_NOT_NUMBER("[ERROR] 유효하지 않은 숫자입니다. 다시 입력해주세요.");
+    ERROR_MESSAGE_WHEN_NOT_NUMBER("[ERROR] 유효하지 않은 숫자입니다. 다시 입력해주세요."),
+    ERROR_MESSAGE_WHEN_INPUTTING("[ERROR] 입력 중 오류가 발생했습니다.");
 
     private final String value;
 
